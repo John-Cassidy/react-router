@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { deleteCard } from '../actions/cardActions';
 import { useParams } from 'react-router-dom';
 import withRouter from '../hooks/withRouter';
-
-// import { deleteCard } from '../actions/cardActions';
-
-
 
 function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
@@ -53,10 +50,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteCard: (id) => {
-      dispatch({
-        type: 'DELETE_CARD',
-        id,
-      });
+      dispatch(deleteCard(id));
     },
   };
 };
