@@ -1,51 +1,32 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
+import { connect } from 'react-redux';
 
-// import { useNavigate } from 'react-router-dom';
-
-const Contact = () => {
-  // let navigate = useNavigate();
-  // setTimeout(() => {
-  //   navigate('/about');
-  // }, 2000);
+const Contact = ({ cards }) => {
   return (
     <div>
-      <div
-        className='ui raised very padded text container segment'
-        style={{ marginTop: '80px' }}
-      >
-        <Link to='/alex' className='ui header'>
-          Alex
-        </Link>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-      <div
-        className='ui raised very padded text container segment'
-        style={{ marginTop: '80px' }}
-      >
-        <Link to='/maria' className='ui header'>
-          Maria
-        </Link>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
+      {cards.map((card) => {
+        return (
+          <div
+            className='ui raised very padded text container segment'
+            style={{ marginTop: '80px' }}
+            key={card.id}
+          >
+            <Link to={`/${card.title}`} className='ui header'>
+              {card.title}
+            </Link>
+            <p>{card.body}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
 
-export default Contact;
+const mapStateToProps = (state) => {
+  return {
+    cards: state.cards,
+  };
+};
+
+export default connect(mapStateToProps)(Contact);

@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Redux
+
+install packages:
+
+> npm i redux react-redux
+> npm i redux-thunk
+
+## How to use react-router-dom v6 navigate in class component
+
+Since useNavigate() is a React Hook and cannot be called directly in React Class Component,
+create a custom hook and wrap class with hook to call function:
+[Directions](https://stackoverflow.com/questions/70143135/how-to-use-react-router-dom-v6-navigate-in-class-component)
