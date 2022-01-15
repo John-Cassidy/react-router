@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-
+import React from 'react';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 function withParams(Component) {
@@ -7,39 +7,29 @@ function withParams(Component) {
 }
 
 class Card extends React.Component {
-  state = { user: '' };
-
   componentDidMount() {
-    let { user } = this.props.params;
-    this.setState({ user });
+    // console.log(this.props.props);
   }
 
   render() {
-    const { user } = this.state;
+    const { title, body } = this.props.card;
     return (
       <div
         className='ui raised very padded text container segment'
         style={{ marginTop: '80px' }}
       >
-        <h3 className='ui header'>{user}</h3>
+        <h3 className='ui header'>{title}</h3>
+        <p>{body}</p>
       </div>
     );
   }
 }
 
-// const Card = () => {
-//   let { user } = useParams();
+const mapStateToProps = (state, ownProps) => {
+  let title = ownProps.params.user;
+  return {
+    card: state.cards.find((card) => card.title === title),
+  };
+};
 
-//   return user ? (
-//     <div
-//       className='ui raised very padded text container segment'
-//       style={{ marginTop: '80px' }}
-//     >
-//       <h3 className='ui header'>{user}</h3>
-//     </div>
-//   ) : (
-//     <div>Loading...</div>
-//   );
-// };
-
-export default withParams(Card);
+export default withParams(connect(mapStateToProps)(Card));
