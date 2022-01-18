@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 
 const TodoList = () => {
-  useState();
+  const [todos, setTodos] = useState([
+    { text: 'Pay bills', id: 1 },
+    { text: 'Do your homework', id: 1 },
+    { text: 'Feed the dog', id: 3 },
+  ]);
+
+  const addTodo = () => {
+    setTodos([...todos, { text: 'Feed the cat', id: todos.length + 1 }]);
+  };
 
   return (
     <div>
       <ul>
-        <li>Pay bills</li>
-        <li>Do your homework</li>
-        <li>Feed the dog</li>
+        {todos.map((todo) => {
+          return <li key={todo.id}>{todo.text}</li>;
+        })}
       </ul>
+      <button onClick={addTodo}>Add a todo</button>
     </div>
   );
 };
